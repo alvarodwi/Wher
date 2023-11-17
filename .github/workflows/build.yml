@@ -17,15 +17,19 @@ jobs:
 
       - name: Create debug.keystore.jks
         working-directory: ./frontend
-        run: echo $DEBUG_KEYSTORE_BASE64 | base64 -d > ./wher-debug.keystore.jks
+        run: echo $DEBUG_KEYSTORE_BASE64 | base64 -d > "wher-debug.keystore.jks"
 
       - name: Create release.keystore.jks
         working-directory: ./frontend
-        run: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > ./wher.keystore.jks
+        run: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > "wher.keystore.jks"
 
       - name: Create keystore.properties
         working-directory: ./frontend
         run: echo "$KEYSTORE_PROPERTIES" > ./keystore.properties
+
+      - name: Debug
+        working-directory: ./frontend
+        run: cat ./keystore.properties
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
